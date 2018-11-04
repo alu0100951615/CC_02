@@ -35,9 +35,13 @@ public class TuringMachine
 		Tape = "..................";
 		Tape = Tape.concat(input);
 		
+		if(input.equals("."))
+			CurrentSymbol = 0;
+		else {
 		
 		while(Tape.charAt(CurrentSymbol) == '.') {
 			CurrentSymbol++;
+		}
 		}
 		
 		while(!CurrentState.equals(AcceptState) && !CurrentState.equals(RejectState))
@@ -108,10 +112,13 @@ public class TuringMachine
 		
 		if (CurrentState.equals(AcceptState))
 		{
+			System.out.println(Tape.substring(0, CurrentSymbol) + " " + CurrentState + " " + Tape.substring(CurrentSymbol) + ".................." );
 			return true;
+			
 		}
 		else
 		{
+			System.out.println(Tape.substring(0, CurrentSymbol) + " " + CurrentState + " " + Tape.substring(CurrentSymbol) + ".................." );
 			return false;
 		}
 		

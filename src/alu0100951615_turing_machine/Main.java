@@ -5,16 +5,16 @@ public class Main
 
 	public static void main(String[] args) 
 	{
-		TuringMachine TM1 = MachinesLibrary.EqualBinaryWords();
+		TuringMachine TM1 = MachinesLibrary.EqualBinaryWords(args[0]);
 		
-		boolean done = TM1.Run("001111101", false);
+		boolean done = TM1.Run("011", false);
 		if (done==true)
 		{
-			System.out.println("The input was accepted.");
+			System.out.println("Cadena aceptada");
 		}
 		else
 		{
-			System.out.println("The input was rejected.");
+			System.out.println("Cadena rechazada");
 		}
 	}
 
