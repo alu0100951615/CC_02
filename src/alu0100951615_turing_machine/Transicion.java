@@ -6,7 +6,7 @@ class Transicion
 	char readSymbol;
 	String writeState;
 	char writeSymbol;
-	String moveDirection;	//true is right, false is left
+	String moveDirection;
 	
 	boolean isConflicting(String state, char symbol)
 	{

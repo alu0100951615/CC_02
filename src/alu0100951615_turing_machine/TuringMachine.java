@@ -9,9 +9,8 @@ public class TuringMachine
 	private Set<String> StateSpace;
 	private Set<Transicion> TransitionSpace;
 	private String StartState;
-	private String AcceptState;
-	private String RejectState;
-	
+	private ArrayList<String> AcceptStates = new ArrayList<String>();
+	private String RejectState;	
 	private String Tape;
 	private String CurrentState;
 	private int CurrentSymbol;
@@ -21,7 +20,6 @@ public class TuringMachine
 		StateSpace = new HashSet<String>();
 		TransitionSpace = new HashSet<Transicion>();
 		StartState = new String("");
-		AcceptState = new String("");
 		RejectState = new String("");
 		Tape = new String("");
 		CurrentState = new String("");
@@ -34,6 +32,7 @@ public class TuringMachine
 		CurrentState = StartState;
 		Tape = "..................";
 		Tape = Tape.concat(input);
+				
 		
 		if(input.equals("."))
 			CurrentSymbol = 0;
@@ -44,7 +43,7 @@ public class TuringMachine
 		}
 		}
 		
-		while(!CurrentState.equals(AcceptState) && !CurrentState.equals(RejectState))
+		while(!CurrentState.equals(RejectState))
 		{
 			boolean foundTransition = false;
 			Transicion CurrentTransition = null;
@@ -78,8 +77,20 @@ public class TuringMachine
 			
 			if (foundTransition == false)
 			{
-				System.err.println ("There is no valid transition for this phase! (state=" + CurrentState + ", symbol=" + Tape.charAt(CurrentSymbol) + ")");
-				return false;
+				System.err.println ( "\n"+ "There is no valid transition for this phase! (state=" + CurrentState + ", symbol=" + Tape.charAt(CurrentSymbol) + ")");
+				for(int i = 0; i < AcceptStates.size(); i++) {
+				if (CurrentState.equals(AcceptStates.get(i)))
+				{
+					//System.out.println(Tape.substring(0, CurrentSymbol) + " " + CurrentState + " " + Tape.substring(CurrentSymbol) + ".................." );
+					return true;
+					
+				}
+				else
+				{
+					//System.out.println(Tape.substring(0, CurrentSymbol) + " " + CurrentState + " " + Tape.substring(CurrentSymbol) + ".................." );
+					return false;
+				}
+			  }
 			}
 			else
 			{
@@ -108,21 +119,8 @@ public class TuringMachine
 			}			
 		
 			
-		}
-		
-		if (CurrentState.equals(AcceptState))
-		{
-			System.out.println(Tape.substring(0, CurrentSymbol) + " " + CurrentState + " " + Tape.substring(CurrentSymbol) + ".................." );
-			return true;
-			
-		}
-		else
-		{
-			System.out.println(Tape.substring(0, CurrentSymbol) + " " + CurrentState + " " + Tape.substring(CurrentSymbol) + ".................." );
-			return false;
-		}
-		
-		
+		}	
+		return false;
 	}
 	
 	public boolean addState(String newState)
@@ -155,7 +153,7 @@ public class TuringMachine
 	{
 		if (StateSpace.contains(newAcceptState) && !RejectState.equals(newAcceptState))
 		{
-			AcceptState = newAcceptState;
+			AcceptStates.add(newAcceptState);
 			return true;
 		}
 		else
@@ -167,7 +165,7 @@ public class TuringMachine
 	
 	public boolean setRejectState(String newRejectState)
 	{
-		if (StateSpace.contains(newRejectState) && !AcceptState.equals(newRejectState))
+		if (StateSpace.contains(newRejectState))
 		{
 			RejectState = newRejectState;
 			return true;
