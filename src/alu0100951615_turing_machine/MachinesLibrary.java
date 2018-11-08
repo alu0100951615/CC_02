@@ -15,6 +15,8 @@ public class MachinesLibrary
     static String blanco;
     static String finales;
     static String transicion;
+    static boolean compfich;
+    static boolean compfich2;
 	private MachinesLibrary() {}
 	
 	public static TuringMachine EqualBinaryWords(String fichero)
@@ -45,6 +47,8 @@ public class MachinesLibrary
 			while(in.hasNextLine()) {								
 				String[] transiciones = in.nextLine().split(" ");
 				for(int i = 0; i < estados.length; i++) {
+					alfabeto.pertenece(transiciones[1]);			//Para comprobar si el alfabeto es el mismo que el de la máquina
+					alfabeto.pertenece(transiciones[3]);
 					if (transiciones[0].equals(estados[i])) {
 						newTM.addTransition(estados[i], transiciones[1].charAt(0), transiciones[2],transiciones[3].charAt(0), transiciones[4]);
 					}
@@ -55,7 +59,8 @@ public class MachinesLibrary
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			System.exit(-1);
-		}		
+		}
+		
 		return newTM;		
 	}
 

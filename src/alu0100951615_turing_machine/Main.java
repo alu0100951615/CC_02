@@ -7,7 +7,7 @@ public class Main
 	{
 		TuringMachine TM1 = MachinesLibrary.EqualBinaryWords(args[0]);
 		
-		boolean done = TM1.Run("ccccaabbbaabb", false);
+		boolean done = TM1.Run("abaaaaaa", false);
 		if (done==true)
 		{
 			System.out.println("Cadena aceptada");

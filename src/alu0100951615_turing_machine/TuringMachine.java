@@ -77,20 +77,12 @@ public class TuringMachine
 			
 			if (foundTransition == false)
 			{
-				System.err.println ( "\n"+ "There is no valid transition for this phase! (state=" + CurrentState + ", symbol=" + Tape.charAt(CurrentSymbol) + ")");
+				System.err.println ( "\n"+ "There is no valid transition for this phase! (state=" + CurrentState + ", symbol=" + Tape.charAt(CurrentSymbol) + ")" + "\n");
 				for(int i = 0; i < AcceptStates.size(); i++) {
 				if (CurrentState.equals(AcceptStates.get(i)))
-				{
-					//System.out.println(Tape.substring(0, CurrentSymbol) + " " + CurrentState + " " + Tape.substring(CurrentSymbol) + ".................." );
 					return true;
-					
-				}
-				else
-				{
-					//System.out.println(Tape.substring(0, CurrentSymbol) + " " + CurrentState + " " + Tape.substring(CurrentSymbol) + ".................." );
-					return false;
-				}
 			  }
+				return false;
 			}
 			else
 			{
